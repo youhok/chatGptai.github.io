@@ -6,6 +6,7 @@
     let loading = document.getElementById("loading");
     loading.classList.add('hide-loading');
 
+
     const url = 'https://chatgpt-chatgpt3-5-chatgpt4.p.rapidapi.com/v1/chat/completions';
     const options = {
         headers: {
@@ -22,15 +23,17 @@
     } catch (error) {
         console.error(error);
     }
+
+
     console.log(input.value);
     sendBtn.addEventListener("click", async () => {
         // input.value;
         res.innerHTML += `
-        <div class="chat-bubble chat-user">
-           <p class="chat-text">${input.value}</p>
-           <span class="chat-time">Just now</span>
-       </div>
-       `;
+            <div class="chat-bubble chat-user">
+               <p class="chat-text">${input.value}</p>
+               <span class="chat-time">Just now</span>
+           </div>
+           `;
 
         options.method = 'POST'
         options.body = JSON.stringify({
@@ -51,11 +54,11 @@
             const result = await response.json();
             console.log(result);
             res.innerHTML += ` 
-         <div class="chat-bubble chat-bot">
-            <p class="chat-text">${result.choices[0].message.content}</p>
-            <span class="chat-time">Just now</span>
-        </div>
-        `;
+             <div class="chat-bubble chat-bot">
+                <p class="chat-text">${result.choices[0].message.content}</p>
+                <span class="chat-time">Just now</span>
+            </div>
+            `;
             // add class hide-loading
             loading.classList.add('hide-loading');
         } catch (error) {
@@ -69,5 +72,5 @@ function sleep(ms) {
     return new Promise(function (reslove, reject) {
         setTimeout(reslove, ms)
     });
-
 }
+
